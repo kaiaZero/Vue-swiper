@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8'>
+    <title> vue</title>
+    <link rel='stylesheet' type='text/css' href='style.css'>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body>
+    <div id='app'>
+      <div id='box'class='box'@mouseover='stop' @mouseleave='play'>
+        <div class='arrow left' @click='movement(500,1)' >
+          <div class='a'>&lt</div>
+        </div>
+        <div class='arrow right' @click='movement(500,-1)'>
+          <div class='a'>&gt</div>
+        </div>
+        <ul class='dotContainer'>
+          <li class='dot' v-for='(dot,i) in images' :key='i' :class='{dotted:i===(currentIndex-1)}' @click='movement2(i)'>
+          </li>
+        </ul>
+        <div id='gallary' class='gallaryStyle' :style='move'>
+          <ul>
+            <li class='listStyle'> <!-- 图1前的辅助图用于无限滚动 -->
+              <img class='styleImg' :src='images[images.length-1].src' alt=''>
+            </li>
+            <li class='listStyle' v-for='(image,index) in images' v-bind:key='index'>
+              <img class='styleImg' :src='image.src' alt=''>
+            </li>
+            <li class='listStyle'> <!--图五后的辅助图 -->
+              <img class='styleImg' :src='images[0].src' alt=''>
+            </li>
+          </ul>
+
+      </div>
+    </div>
+  </div>
+  <script src='script.js'></script>
+  </body>
+</html>
