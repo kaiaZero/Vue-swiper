@@ -1,7 +1,6 @@
 var app = new Vue({
   el:'#app',
   data:{
-    message:'hello',
     images:[{
       src:'static/1.jpg'
     },
@@ -20,6 +19,7 @@ var app = new Vue({
     this.init()
   },
   computed:{
+    //修改style移动图片
     move:function(){
       return {left:`${this.position}px`}
     },
@@ -34,6 +34,7 @@ var app = new Vue({
     init(){
       this.play();
     },
+    //按左右键的移动
     movement(distance,direction){
       if(!this.animation) return; //保证移动效果后click才再次有效，防止快速点击事件
       this.animation = false;
@@ -47,31 +48,13 @@ var app = new Vue({
       this.des = this.position + distance * direction;
       this.animate2(i,this.des)
     },
-    /*  this.animate1(destination,direction);
-    },
-    animate1(des,direction){
-      if((des-this.position)<-0.1||(des-this.position>0.1)){
-        var step = (des-this.position)/3;
-        this.position+=step;
-        this.timer=setTimeout(()=>{this.animate1(des,direction)},5)
-      }
-      else {
-        this.animation = true;
-        this.position = des;
-        if (this.position>-3){
-          this.position = -500 *this.len ;
-        }
-        else if(this.position<-500*(this.len+1)+3){
-          this.position = -500;
-
-        }
-      }
-    }, */
+    //按圆点移动
     movement2(i){
       this.currentIndex=i+1;
       this.des=-500*(i+1);
       this.animate2(i,this.des);
     },
+    //移动效果
     animate2(i,des){
       if((des-this.position)<-0.1||(des-this.position>0.1)){
           var step = (des-this.position)/3;
@@ -88,6 +71,7 @@ var app = new Vue({
         }
       else this.animation = true;
     },
+    //自动播放
     play(){
       if(this.timer){
         window.clearInterval(this.timer);
